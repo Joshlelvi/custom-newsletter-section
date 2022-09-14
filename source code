@@ -1,0 +1,189 @@
+{%- style -%}
+  #Newsletter--{{ section.id }} {
+    {%- if bg_color != 'rgba(0,0,0,0)' and bg_color != '' -%}
+      --bg: {{ bg_color }};
+      background: {{ bg_color }};
+    {%- endif -%}
+      --overlay-opacity: {{ overlay_opacity }};
+    }
+
+
+  .newsletter{
+   background: #FF7165;
+   min-height:200px;
+    padding: 0 50px;
+    display:flex;
+    color:#fff;
+}
+  svg.icon.icon-arrow {
+    fill: #fff;
+    height: 20px;
+}
+  .newsletterleft{
+    display:flex;
+    flex-direction:column;
+	  padding:20px;
+	  padding-top:45px;
+	  padding-bottom:45px;
+	flex:0 0 50%;
+    border-right: 1px solid #edc7c6;
+    justify-content: space-between;
+  }
+  .newsletterright{
+    display:flex;
+	flex:0 0 50%;
+	padding: 35px 0;
+	align-items: end;
+  }
+  .rightl{
+  flex:auto;
+  padding: 0 10px;
+  }
+  .rightr{
+  flex:0 0 44%;
+  padding: 0 10px;
+  }
+  rightl p,rightl h1{
+  margin:0;
+  padding:0;
+  color: #fff;
+}
+ .rightl  p{
+  font-size: 13px;
+    font-weight: 500;
+  }
+.rightr a{
+  color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+}
+  .newsletterleft form input,.newsletterleft button{
+    border:none;
+  }
+  .newsletterleft form input{
+    border:none;
+    border-bottom: 1px solid #fff;
+    color:#fff;
+  }
+::placeholder{
+  color: #fff !important;
+
+}
+
+  @media screen and (max-width: 900px){
+    .newsletter{
+      flex-direction: column-reverse;
+      padding: 0 15px;
+    }
+    .newsletterright{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 13px;
+    }
+    .newsletterleft{
+      border:0;
+      border-top: 1px solid #edc7c6;
+      padding: 20px 0;
+    }
+    .input-group__btn.input-group__btn--icon{
+      height:0;
+    }
+    .input-group__item{
+      margin-right:0;
+    }
+    .input-group__item {
+    max-width: 99%;
+    }
+    .input-group--inline .input-group__item--btn{
+      margin-left: -42px;
+    }
+}
+  .abc{
+    transition: all 0.4s;
+  }
+ .rightr a:hover .abc{
+   padding-left: 12px;
+ }
+{%- endstyle -%}
+
+<div class="newsletter">
+<div class="newsletterleft">
+<h1>{{ section.settings.title }}</h1>
+            {%- render 'newsletter-form', unique: unique, extra_fields: section.settings.extra_fields, button_text: section.settings.button_text -%}
+
+</div>
+<div class="newsletterright">
+             <div class="rightl">
+          <h1>{{ section.settings.centerheading }}</h1>
+		  {{ section.settings.text }}
+            </div>
+            <div class="rightr">
+            <a href="{{ section.settings.btnurl | url }}">{{ section.settings.textright }}<div class="abc" style="display:inline"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+</svg> </div></a>
+            </div>
+</div>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Sign Up For Email",
+        "default": "Sign Up For Email"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Center Text",
+        "default": "Special offers, content & monthly prizes"
+      },
+      {
+        "type": "text",
+        "id": "centerheading",
+        "label": "Center Heading",
+        "default": "Join Brighca Texts"
+      },
+      {
+        "type": "text",
+        "id": "textright",
+        "label": "Right Link Text",
+        "default": "SIGNUP TO UNLOCK 15% OFF "
+      },
+      {
+        "type": "url",
+        "id": "btnurl",
+        "label": "Right Link"
+      },
+      {
+        "type": "paragraph",
+        "content": "Subscribers are under 'Accepts Marketing' in your [customer admin](/admin/customers)."
+      }
+      
+    ],
+    
+    "presets": [
+      {
+        "name": "Newsletter",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}
+
+
+
